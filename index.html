@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#b51224">
+  <meta name="description" content="南京妇联普法互动答题">
+  <title>南京妇联普法互动答题</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23b51224'/%3E%3Cpath d='M19 18h26v28H19z' fill='%23fff8ed'/%3E%3Cpath d='M24 25h16M24 32h16M24 39h10' stroke='%23b51224' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app" id="app">
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="wash" aria-hidden="true"></div>
+    <button class="sound" id="soundBtn" type="button" aria-label="关闭音效" aria-pressed="true">
+      <span aria-hidden="true">♪</span>
+    </button>
+
+    <section class="screen intro is-active" id="introScreen" aria-labelledby="introTitle">
+      <div class="brand-pill">南京妇女联合会</div>
+      <div class="intro-copy">
+        <h1 id="introTitle">职场女性<br><span>权益守护挑战</span></h1>
+      </div>
+      <button class="primary-btn start-btn" id="startBtn" type="button" aria-live="polite">
+        <i class="start-progress" id="startProgress" aria-hidden="true"></i>
+        <span id="startLabel">开始答题</span><b id="startArrow" aria-hidden="true">›</b>
+      </button>
+    </section>
+
+    <section class="screen quiz" id="quizScreen" aria-labelledby="questionText">
+      <header class="quiz-head">
+        <div class="brand-pill compact">南京妇联 · 普法微课堂</div>
+        <div class="progress-copy"><span id="currentNo">1</span> / 5</div>
+      </header>
+      <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+
+      <article class="question-card" id="questionCard">
+        <div class="category" id="category">就业性别歧视</div>
+        <p class="source" id="source"></p>
+        <h2 id="questionText"></h2>
+        <div class="answers" id="answers"></div>
+      </article>
+      <p class="tap-tip">请选择你认为正确的答案</p>
+    </section>
+
+    <section class="screen result" id="resultScreen" aria-labelledby="resultTitle">
+      <div class="brand-pill">南京妇联 · 普法微课堂</div>
+      <div class="result-card">
+        <div class="result-medal" aria-hidden="true">🏅</div>
+        <p class="eyebrow">挑战完成</p>
+        <h2 id="resultTitle">权益知识达人</h2>
+        <p class="score"><strong id="scoreNo">5</strong><span>/ 5</span></p>
+        <p class="result-note" id="resultNote">每一次了解，都是守护自己与她人的力量。</p>
+      </div>
+      <button class="primary-btn" id="restartBtn" type="button">再答一次</button>
+    </section>
+
+    <div class="feedback" id="feedback" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle" hidden>
+      <div class="feedback-shade"></div>
+      <div class="feedback-wrap">
+        <div class="feedback-pop" id="feedbackPop">
+          <div class="face" id="face" aria-hidden="true">🎉</div>
+          <div class="ribbon" id="feedbackTitle">答对啦</div>
+          <div class="analysis-card">
+            <p class="correct-line">正确答案：<strong id="correctAnswer">A</strong></p>
+            <p class="analysis" id="analysisText"></p>
+          </div>
+        </div>
+        <button class="next-btn" id="nextBtn" type="button">挑战下一关</button>
+      </div>
+    </div>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
