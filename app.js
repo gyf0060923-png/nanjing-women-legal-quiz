@@ -59,7 +59,7 @@ let musicStep = 0;
 let starting = false;
 
 const scene = (name) => {
-  $("app").classList.toggle("is-cover", name === "cover-v2.png");
+  $("app").classList.toggle("is-cover", name === "cover-v3.png");
   backdrop.style.opacity = ".15";
   window.setTimeout(() => {
     backdrop.style.backgroundImage = `url("./assets/${name}")`;
@@ -181,7 +181,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v2.png");
+  scene("cover-v3.png");
   showScreen(resultScreen);
   tone(true);
 };
@@ -251,4 +251,4 @@ $("soundBtn").addEventListener("click", (event) => {
 });
 
 questions.forEach((_, index) => { const image = new Image(); image.src = `./assets/question-${index + 1}.webp`; });
-scene("cover-v2.png");
+scene("cover-v3.png");
