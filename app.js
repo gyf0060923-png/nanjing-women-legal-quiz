@@ -53,10 +53,18 @@ let current = 0;
 let score = 0;
 let locked = false;
 let soundOn = true;
-let audioContext;
-let musicTimer;
-let musicStep = 0;
 let starting = false;
+
+const backgroundMusic = new Audio("./assets/background-music.mp3");
+const correctSound = new Audio("./assets/correct.mp3");
+const wrongSound = new Audio("./assets/wrong.mp3");
+backgroundMusic.loop = true;
+backgroundMusic.preload = "auto";
+backgroundMusic.volume = .32;
+correctSound.preload = "auto";
+correctSound.volume = .9;
+wrongSound.preload = "auto";
+wrongSound.volume = .9;
 
 const scene = (name) => {
   $("app").classList.toggle("is-cover", name === "cover-v3.png");
@@ -71,51 +79,24 @@ const showScreen = (screen) => {
   [introScreen, storyScreen, quizScreen, resultScreen].forEach((item) => item.classList.toggle("is-active", item === screen));
 };
 
-const getAudio = () => {
-  audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
-  if (audioContext.state === "suspended") audioContext.resume();
-  return audioContext;
-};
-
-const playNote = (frequency, delay = 0, duration = .18, volume = .07, type = "triangle") => {
-  if (!soundOn) return;
-  try {
-    const ctx = getAudio();
-    const starts = ctx.currentTime + delay;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.frequency.setValueAtTime(frequency, starts);
-    osc.type = type;
-    gain.gain.setValueAtTime(.0001, starts);
-    gain.gain.exponentialRampToValueAtTime(volume, starts + .018);
-    gain.gain.exponentialRampToValueAtTime(.0001, starts + duration);
-    osc.connect(gain).connect(ctx.destination);
-    osc.start(starts);
-    osc.stop(starts + duration + .03);
-  } catch (_) {}
-};
-
 const startMusic = () => {
-  if (!soundOn || musicTimer) return;
-  const melody = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880, 698.46];
-  const tick = () => {
-    playNote(melody[musicStep % melody.length], 0, .28, .028, "triangle");
-    if (musicStep % 2 === 0) playNote(261.63, 0, .22, .012, "sine");
-    musicStep += 1;
-  };
-  tick();
-  musicTimer = window.setInterval(tick, 430);
+  if (!soundOn || !backgroundMusic.paused) return;
+  backgroundMusic.play().catch(() => {});
 };
 
 const stopMusic = () => {
-  window.clearInterval(musicTimer);
-  musicTimer = undefined;
+  backgroundMusic.pause();
+  [correctSound, wrongSound].forEach((effect) => {
+    effect.pause();
+    effect.currentTime = 0;
+  });
 };
 
 const tone = (correct) => {
   if (!soundOn) return;
-  const notes = correct ? [523.25, 659.25, 783.99, 1046.5] : [392, 311.13, 246.94];
-  notes.forEach((frequency, i) => playNote(frequency, i * .085, correct ? .22 : .25, correct ? .12 : .09, correct ? "square" : "sawtooth"));
+  const effect = correct ? correctSound : wrongSound;
+  effect.currentTime = 0;
+  effect.play().catch(() => {});
 };
 
 const showStory = () => {
@@ -127,7 +108,6 @@ const showStory = () => {
   $("storyImage").alt = `第${current + 1}关${q.category}情景漫画`;
   scene(`question-${current + 1}.webp`);
   showScreen(storyScreen);
-  playNote(659.25, 0, .16, .06);
 };
 
 const renderQuestion = () => {
@@ -183,7 +163,6 @@ const finish = () => {
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
   scene("cover-v3.png");
   showScreen(resultScreen);
-  tone(true);
 };
 
 $("startBtn").addEventListener("click", () => {
@@ -195,7 +174,6 @@ $("startBtn").addEventListener("click", () => {
   button.disabled = true;
   button.classList.add("is-loading");
   startMusic();
-  tone(true);
 
   const startedAt = performance.now();
   const duration = 1250;
@@ -224,7 +202,6 @@ $("startBtn").addEventListener("click", () => {
 });
 
 $("enterQuestionBtn").addEventListener("click", () => {
-  playNote(783.99, 0, .15, .07);
   showScreen(quizScreen);
   renderQuestion();
 });
@@ -246,7 +223,7 @@ $("soundBtn").addEventListener("click", (event) => {
   soundOn = !soundOn;
   event.currentTarget.setAttribute("aria-pressed", String(soundOn));
   event.currentTarget.setAttribute("aria-label", soundOn ? "关闭音效" : "开启音效");
-  if (soundOn) { startMusic(); tone(true); }
+  if (soundOn) startMusic();
   else stopMusic();
 });
 
