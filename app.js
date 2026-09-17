@@ -54,6 +54,7 @@ let score = 0;
 let locked = false;
 let soundOn = true;
 let starting = false;
+let questionsPreloaded = false;
 
 const backgroundMusic = new Audio("./assets/background-music.mp3");
 const correctSound = new Audio("./assets/correct.mp3");
@@ -61,13 +62,15 @@ const wrongSound = new Audio("./assets/wrong.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.preload = "auto";
 backgroundMusic.volume = .32;
+backgroundMusic.autoplay = true;
+backgroundMusic.playsInline = true;
 correctSound.preload = "auto";
 correctSound.volume = .9;
 wrongSound.preload = "auto";
 wrongSound.volume = .9;
 
 const scene = (name) => {
-  $("app").classList.toggle("is-cover", name === "cover-v3.png");
+  $("app").classList.toggle("is-cover", name === "cover-v3.webp");
   backdrop.style.opacity = ".15";
   window.setTimeout(() => {
     backdrop.style.backgroundImage = `url("./assets/${name}")`;
@@ -82,6 +85,15 @@ const showScreen = (screen) => {
 const startMusic = () => {
   if (!soundOn || !backgroundMusic.paused) return;
   backgroundMusic.play().catch(() => {});
+};
+
+const preloadQuestions = () => {
+  if (questionsPreloaded) return;
+  questionsPreloaded = true;
+  questions.forEach((_, index) => {
+    const image = new Image();
+    image.src = `./assets/question-${index + 1}.webp`;
+  });
 };
 
 const stopMusic = () => {
@@ -161,7 +173,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v3.png");
+  scene("cover-v3.webp");
   showScreen(resultScreen);
 };
 
@@ -174,6 +186,7 @@ $("startBtn").addEventListener("click", () => {
   button.disabled = true;
   button.classList.add("is-loading");
   startMusic();
+  preloadQuestions();
 
   const startedAt = performance.now();
   const duration = 1250;
@@ -227,5 +240,9 @@ $("soundBtn").addEventListener("click", (event) => {
   else stopMusic();
 });
 
-questions.forEach((_, index) => { const image = new Image(); image.src = `./assets/question-${index + 1}.webp`; });
-scene("cover-v3.png");
+window.addEventListener("load", startMusic, { once: true });
+document.addEventListener("WeixinJSBridgeReady", startMusic, { once: true });
+["pointerdown", "touchstart", "click"].forEach((eventName) => {
+  document.addEventListener(eventName, startMusic, { once: true, capture: true });
+});
+scene("cover-v3.webp");
