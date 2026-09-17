@@ -23,7 +23,7 @@ button { font: inherit; }
   position: absolute;
   inset: 0;
   z-index: -3;
-  background: url("./assets/cover.jpg") center center / cover no-repeat;
+  background: url("./assets/cover-v2.png") center center / cover no-repeat;
   transition: opacity .18s ease;
   transform: scale(1.03);
   animation: drift 12s ease-in-out infinite alternate;
@@ -65,8 +65,12 @@ button { font: inherit; }
 .brand-pill.compact { padding: 7px 13px; font-size: .78rem; }
 
 .intro { justify-content: flex-start; }
-.intro > .brand-pill { align-self: center; margin-top: clamp(10px, 2vh, 26px); padding: 9px 28px; font-size: 1rem; }
-.intro-copy { width: min(100%, 520px); margin-top: clamp(34px, 7vh, 76px); text-align: center; }
+.cover-logo {
+  align-self: flex-start; width: clamp(118px, 34vw, 170px); margin-top: 2px; padding: 7px 9px;
+  border-radius: 12px; background: rgba(255,255,255,.92); box-shadow: 0 7px 22px rgba(56,65,97,.2);
+}
+.cover-logo img { display: block; width: 100%; height: auto; }
+.intro-copy { width: min(100%, 520px); margin-top: clamp(24px, 4.5vh, 54px); text-align: center; }
 .eyebrow { margin: 0 0 8px; font-weight: 800; letter-spacing: .24em; color: #b11227; }
 .intro h1 { margin: 0; color: #fffdf7; font-size: clamp(2.45rem, 9.4vw, 3.65rem); line-height: 1.25; letter-spacing: .035em; font-weight: 900; -webkit-text-stroke: 2px #ad2832; paint-order: stroke fill; text-shadow: 0 3px 0 #8f1c27, 0 9px 20px rgba(85,0,10,.22); }
 .intro h1 span { color: inherit; }
@@ -87,6 +91,24 @@ button { font: inherit; }
 .start-progress { position: absolute; z-index: 1; inset: 0 auto 0 0; width: 0; border-radius: inherit; background: linear-gradient(90deg,#f05b68,#d7293e 65%,#bd172d); box-shadow: inset -3px 0 12px rgba(255,239,195,.5); }
 .start-btn.is-loading { cursor: wait; }
 .start-btn.is-loading b { opacity: 0; transform: translateX(10px); }
+.story { justify-content: flex-start; padding-left: 14px; padding-right: 14px; }
+.story-head { width: min(100%, 520px); padding: 0 54px 0 8px; display: flex; align-items: center; justify-content: space-between; }
+.story-track { margin-bottom: 12px; }
+.story-frame {
+  position: relative; width: min(100%, 500px); flex: 1 1 auto; min-height: 0; margin: 0;
+  overflow: hidden; border-radius: 27px; border: 2px solid rgba(255,255,255,.9);
+  background: #edf7ff; box-shadow: 0 22px 54px rgba(67,0,10,.28);
+}
+.story-frame img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+.story-frame figcaption {
+  position: absolute; inset: auto 0 0; padding: 54px 22px 18px;
+  color: #fff; background: linear-gradient(transparent,rgba(75,4,14,.88));
+  display: flex; flex-direction: column; gap: 4px;
+}
+.story-frame figcaption span { font-size: .76rem; letter-spacing: .18em; opacity: .82; }
+.story-frame figcaption strong { font-size: 1.12rem; }
+.story-btn { flex: 0 0 auto; min-height: 56px; width: min(86%, 390px); margin-top: 13px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+.story-btn b { font-size: 1.8rem; line-height: 1; }
 .quiz { justify-content: flex-start; }
 .quiz-head { width: min(100%, 520px); padding-right: 54px; display: flex; align-items: center; justify-content: space-between; }
 .progress-copy { color: #81101e; font-weight: 800; background: rgba(255,249,238,.88); border-radius: 99px; padding: 8px 13px; box-shadow: 0 8px 20px rgba(83,0,9,.12); }
@@ -156,6 +178,8 @@ button { font: inherit; }
   .intro-lead { margin-top: 12px; line-height: 1.55; }
   .question-card { padding: 20px; }
   .analysis-card { max-height: 52svh; }
+  .story-frame figcaption { padding-top: 38px; }
+  .story-btn { min-height: 50px; margin-top: 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

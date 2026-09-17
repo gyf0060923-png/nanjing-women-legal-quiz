@@ -18,7 +18,9 @@
     </button>
 
     <section class="screen intro is-active" id="introScreen" aria-labelledby="introTitle">
-      <div class="brand-pill">南京妇女联合会</div>
+      <div class="cover-logo" aria-label="南京市妇女联合会">
+        <img src="./assets/nanjing-women-logo.jpg" alt="南京市妇女联合会">
+      </div>
       <div class="intro-copy">
         <h1 id="introTitle">职场女性<br><span>权益守护挑战</span></h1>
       </div>
@@ -26,6 +28,22 @@
         <i class="start-progress" id="startProgress" aria-hidden="true"></i>
         <span id="startLabel">开始答题</span><b id="startArrow" aria-hidden="true">›</b>
       </button>
+    </section>
+
+    <section class="screen story" id="storyScreen" aria-labelledby="storyCategory">
+      <header class="story-head">
+        <div class="brand-pill compact">南京妇联 · 普法微课堂</div>
+        <div class="progress-copy"><span id="storyNo">1</span> / 5</div>
+      </header>
+      <div class="progress-track story-track" aria-hidden="true"><span id="storyProgressBar"></span></div>
+      <figure class="story-frame">
+        <img id="storyImage" src="./assets/question-1.webp" alt="第一关情景漫画">
+        <figcaption>
+          <span>情景漫画</span>
+          <strong id="storyCategory">就业性别歧视</strong>
+        </figcaption>
+      </figure>
+      <button class="primary-btn story-btn" id="enterQuestionBtn" type="button">进入答题 <b aria-hidden="true">›</b></button>
     </section>
 
     <section class="screen quiz" id="quizScreen" aria-labelledby="questionText">

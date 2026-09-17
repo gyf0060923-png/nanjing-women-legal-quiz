@@ -43,6 +43,7 @@ const questions = [
 
 const $ = (id) => document.getElementById(id);
 const introScreen = $("introScreen");
+const storyScreen = $("storyScreen");
 const quizScreen = $("quizScreen");
 const resultScreen = $("resultScreen");
 const feedback = $("feedback");
@@ -53,10 +54,12 @@ let score = 0;
 let locked = false;
 let soundOn = true;
 let audioContext;
+let musicTimer;
+let musicStep = 0;
 let starting = false;
 
 const scene = (name) => {
-  $("app").classList.toggle("is-cover", name === "cover.jpg");
+  $("app").classList.toggle("is-cover", name === "cover-v2.png");
   backdrop.style.opacity = ".15";
   window.setTimeout(() => {
     backdrop.style.backgroundImage = `url("./assets/${name}")`;
@@ -65,27 +68,66 @@ const scene = (name) => {
 };
 
 const showScreen = (screen) => {
-  [introScreen, quizScreen, resultScreen].forEach((item) => item.classList.toggle("is-active", item === screen));
+  [introScreen, storyScreen, quizScreen, resultScreen].forEach((item) => item.classList.toggle("is-active", item === screen));
+};
+
+const getAudio = () => {
+  audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+  if (audioContext.state === "suspended") audioContext.resume();
+  return audioContext;
+};
+
+const playNote = (frequency, delay = 0, duration = .18, volume = .07, type = "triangle") => {
+  if (!soundOn) return;
+  try {
+    const ctx = getAudio();
+    const starts = ctx.currentTime + delay;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.setValueAtTime(frequency, starts);
+    osc.type = type;
+    gain.gain.setValueAtTime(.0001, starts);
+    gain.gain.exponentialRampToValueAtTime(volume, starts + .018);
+    gain.gain.exponentialRampToValueAtTime(.0001, starts + duration);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(starts);
+    osc.stop(starts + duration + .03);
+  } catch (_) {}
+};
+
+const startMusic = () => {
+  if (!soundOn || musicTimer) return;
+  const melody = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880, 698.46];
+  const tick = () => {
+    playNote(melody[musicStep % melody.length], 0, .28, .028, "triangle");
+    if (musicStep % 2 === 0) playNote(261.63, 0, .22, .012, "sine");
+    musicStep += 1;
+  };
+  tick();
+  musicTimer = window.setInterval(tick, 430);
+};
+
+const stopMusic = () => {
+  window.clearInterval(musicTimer);
+  musicTimer = undefined;
 };
 
 const tone = (correct) => {
   if (!soundOn) return;
-  try {
-    audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
-    const notes = correct ? [523.25, 659.25, 783.99] : [330, 247];
-    notes.forEach((frequency, i) => {
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      osc.frequency.value = frequency;
-      osc.type = "sine";
-      gain.gain.setValueAtTime(.0001, audioContext.currentTime + i * .1);
-      gain.gain.exponentialRampToValueAtTime(.12, audioContext.currentTime + i * .1 + .02);
-      gain.gain.exponentialRampToValueAtTime(.0001, audioContext.currentTime + i * .1 + .18);
-      osc.connect(gain).connect(audioContext.destination);
-      osc.start(audioContext.currentTime + i * .1);
-      osc.stop(audioContext.currentTime + i * .1 + .2);
-    });
-  } catch (_) {}
+  const notes = correct ? [523.25, 659.25, 783.99, 1046.5] : [392, 311.13, 246.94];
+  notes.forEach((frequency, i) => playNote(frequency, i * .085, correct ? .22 : .25, correct ? .12 : .09, correct ? "square" : "sawtooth"));
+};
+
+const showStory = () => {
+  const q = questions[current];
+  $("storyNo").textContent = current + 1;
+  $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
+  $("storyCategory").textContent = q.category;
+  $("storyImage").src = `./assets/question-${current + 1}.webp`;
+  $("storyImage").alt = `第${current + 1}关${q.category}情景漫画`;
+  scene(`question-${current + 1}.webp`);
+  showScreen(storyScreen);
+  playNote(659.25, 0, .16, .06);
 };
 
 const renderQuestion = () => {
@@ -139,7 +181,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover.jpg");
+  scene("cover-v2.png");
   showScreen(resultScreen);
   tone(true);
 };
@@ -152,6 +194,7 @@ $("startBtn").addEventListener("click", () => {
   const label = $("startLabel");
   button.disabled = true;
   button.classList.add("is-loading");
+  startMusic();
   tone(true);
 
   const startedAt = performance.now();
@@ -167,8 +210,7 @@ $("startBtn").addEventListener("click", () => {
     else window.setTimeout(() => {
       current = 0;
       score = 0;
-      showScreen(quizScreen);
-      renderQuestion();
+      showStory();
       window.setTimeout(() => {
         starting = false;
         button.disabled = false;
@@ -181,25 +223,32 @@ $("startBtn").addEventListener("click", () => {
   requestAnimationFrame(advance);
 });
 
+$("enterQuestionBtn").addEventListener("click", () => {
+  playNote(783.99, 0, .15, .07);
+  showScreen(quizScreen);
+  renderQuestion();
+});
+
 $("nextBtn").addEventListener("click", () => {
   feedback.hidden = true;
   if (current === questions.length - 1) finish();
-  else { current += 1; renderQuestion(); }
+  else { current += 1; showStory(); }
 });
 
 $("restartBtn").addEventListener("click", () => {
   current = 0;
   score = 0;
-  showScreen(quizScreen);
-  renderQuestion();
+  startMusic();
+  showStory();
 });
 
 $("soundBtn").addEventListener("click", (event) => {
   soundOn = !soundOn;
   event.currentTarget.setAttribute("aria-pressed", String(soundOn));
   event.currentTarget.setAttribute("aria-label", soundOn ? "关闭音效" : "开启音效");
-  if (soundOn) tone(true);
+  if (soundOn) { startMusic(); tone(true); }
+  else stopMusic();
 });
 
 questions.forEach((_, index) => { const image = new Image(); image.src = `./assets/question-${index + 1}.webp`; });
-scene("cover.jpg");
+scene("cover-v2.png");
