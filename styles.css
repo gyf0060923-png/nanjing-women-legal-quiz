@@ -100,13 +100,6 @@ button { font: inherit; }
   background: #edf7ff; box-shadow: 0 22px 54px rgba(67,0,10,.28);
 }
 .story-frame img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
-.story-frame figcaption {
-  position: absolute; inset: auto 0 0; padding: 54px 22px 18px;
-  color: #fff; background: linear-gradient(transparent,rgba(75,4,14,.88));
-  display: flex; flex-direction: column; gap: 4px;
-}
-.story-frame figcaption span { font-size: .76rem; letter-spacing: .18em; opacity: .82; }
-.story-frame figcaption strong { font-size: 1.12rem; }
 .story-btn { flex: 0 0 auto; min-height: 56px; width: min(86%, 390px); margin-top: 13px; display: flex; align-items: center; justify-content: center; gap: 16px; }
 .story-btn b { font-size: 1.8rem; line-height: 1; }
 .quiz { justify-content: flex-start; }
@@ -178,7 +171,6 @@ button { font: inherit; }
   .intro-lead { margin-top: 12px; line-height: 1.55; }
   .question-card { padding: 20px; }
   .analysis-card { max-height: 52svh; }
-  .story-frame figcaption { padding-top: 38px; }
   .story-btn { min-height: 50px; margin-top: 9px; }
 }
 

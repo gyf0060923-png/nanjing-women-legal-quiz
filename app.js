@@ -115,9 +115,8 @@ const showStory = () => {
   const q = questions[current];
   $("storyNo").textContent = current + 1;
   $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
-  $("storyCategory").textContent = q.category;
   $("storyImage").src = `./assets/question-${current + 1}.webp`;
-  $("storyImage").alt = `第${current + 1}关${q.category}情景漫画`;
+  $("storyImage").alt = `第${current + 1}关${q.category}插画`;
   scene(`question-${current + 1}.webp`);
   showScreen(storyScreen);
 };
