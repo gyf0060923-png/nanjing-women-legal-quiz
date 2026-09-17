@@ -66,8 +66,8 @@ button { font: inherit; }
 
 .intro { justify-content: flex-start; }
 .cover-logo {
-  align-self: flex-start; width: clamp(118px, 34vw, 170px); margin-top: 2px; padding: 7px 9px;
-  border-radius: 12px; background: rgba(255,255,255,.92); box-shadow: 0 7px 22px rgba(56,65,97,.2);
+  align-self: flex-start; width: clamp(118px, 34vw, 170px); margin-top: 2px;
+  filter: drop-shadow(0 5px 10px rgba(56,65,97,.18));
 }
 .cover-logo img { display: block; width: 100%; height: auto; }
 .intro-copy { width: min(100%, 520px); margin-top: clamp(24px, 4.5vh, 54px); text-align: center; }
