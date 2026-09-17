@@ -139,18 +139,6 @@ button { font: inherit; }
 .face { position: absolute; z-index: 3; left: 50%; top: -94px; width: 1.15em; height: 1.15em; transform: translateX(-50%); display: grid; place-items: center; font-size: clamp(4.2rem,18vw,6.5rem); line-height: 1; filter: drop-shadow(0 12px 16px rgba(45,0,8,.35)); }
 .feedback:not(.is-wrong) .face { animation: celebrateFace .82s cubic-bezier(.16,1.35,.3,1) both; }
 .party-emoji { display: block; transform-origin: 28% 78%; animation: partyEmojiBloom .82s cubic-bezier(.16,1.25,.3,1) both; }
-.emoji-ribbons { position: absolute; inset: 0; pointer-events: none; }
-.emoji-ribbons i {
-  position: absolute; left: 47%; top: 48%; width: .085em; height: .24em; border-radius: 99px;
-  background: var(--c); opacity: 0;
-  animation: miniRibbonBloom .72s cubic-bezier(.15,.82,.28,1.25) var(--d) forwards;
-}
-.emoji-ribbons i:nth-child(1) { --x: -.48em; --y: -.48em; --r: -38deg; --c: #f33a78; --d: .05s; }
-.emoji-ribbons i:nth-child(2) { --x: -.16em; --y: -.66em; --r: 16deg; --c: #ffd34e; --d: .08s; }
-.emoji-ribbons i:nth-child(3) { --x: .18em; --y: -.64em; --r: 42deg; --c: #5aa9ff; --d: .11s; }
-.emoji-ribbons i:nth-child(4) { --x: .49em; --y: -.43em; --r: 72deg; --c: #ef58bd; --d: .14s; }
-.emoji-ribbons i:nth-child(5) { --x: .57em; --y: -.08em; --r: 102deg; --c: #55cf83; --d: .17s; }
-.emoji-ribbons i:nth-child(6) { --x: -.58em; --y: -.12em; --r: -74deg; --c: #8a6bea; --d: .2s; }
 .ribbon { position: relative; z-index: 2; width: fit-content; min-width: 196px; margin: 0 auto -22px; padding: 12px 29px; border-radius: 22px; color: #fff; background: linear-gradient(135deg,#cf2038,#9c0b21); border: 3px solid #ffdd8e; box-shadow: 0 8px 0 #7d091b,0 14px 28px rgba(65,0,10,.3); text-align: center; font-size: clamp(1.75rem,8vw,2.55rem); font-weight: 900; letter-spacing: .1em; transform: rotate(-1.5deg); }
 .feedback.is-wrong .ribbon { background: linear-gradient(135deg,#e65745,#b51e31); }
 .analysis-card { max-height: min(56svh,600px); overflow: auto; padding: 52px clamp(24px,6vw,38px) 30px; border-radius: 29px; background: linear-gradient(180deg,#fff,#fff7ed); box-shadow: 0 26px 65px rgba(30,0,5,.38); }
@@ -189,11 +177,6 @@ button { font: inherit; }
   0% { clip-path: circle(0 at 28% 78%); transform: scale(.55) rotate(-20deg); opacity: 0; }
   45% { clip-path: circle(44% at 28% 78%); transform: scale(1.16) rotate(7deg); opacity: 1; }
   100% { clip-path: circle(130% at 28% 78%); transform: scale(1) rotate(0); opacity: 1; }
-}
-@keyframes miniRibbonBloom {
-  0% { transform: translate(-50%,-50%) scale(.1) rotate(0deg); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1) rotate(var(--r)); opacity: 1; }
 }
 @keyframes confettiBurst {
   0% { transform: translate(-50%,20px) scale(.2) rotate(0deg); opacity: 0; }

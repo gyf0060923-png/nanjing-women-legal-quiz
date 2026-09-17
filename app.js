@@ -185,7 +185,7 @@ const chooseAnswer = (index, button) => {
   window.setTimeout(() => {
     feedback.classList.toggle("is-wrong", !correct);
     $("face").innerHTML = correct
-      ? '<span class="party-emoji">🎉</span><span class="emoji-ribbons" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>'
+      ? '<span class="party-emoji">🎉</span>'
       : "🥺";
     $("feedbackTitle").textContent = correct ? "答对啦" : "答错啦";
     $("correctAnswer").textContent = String.fromCharCode(65 + q.answer);
