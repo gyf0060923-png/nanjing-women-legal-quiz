@@ -70,7 +70,7 @@ wrongSound.preload = "auto";
 wrongSound.volume = .9;
 
 const scene = (name) => {
-  $("app").classList.toggle("is-cover", name === "cover-v3.webp");
+  $("app").classList.toggle("is-cover", name === "cover-v4.webp");
   backdrop.style.opacity = ".15";
   window.setTimeout(() => {
     backdrop.style.backgroundImage = `url("./assets/${name}")`;
@@ -173,7 +173,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v3.webp");
+  scene("cover-v4.webp");
   showScreen(resultScreen);
 };
 
@@ -245,4 +245,4 @@ document.addEventListener("WeixinJSBridgeReady", startMusic, { once: true });
 ["pointerdown", "touchstart", "click"].forEach((eventName) => {
   document.addEventListener(eventName, startMusic, { once: true, capture: true });
 });
-scene("cover-v3.webp");
+scene("cover-v4.webp");
