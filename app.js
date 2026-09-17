@@ -111,6 +111,34 @@ const tone = (correct) => {
   effect.play().catch(() => {});
 };
 
+const launchConfetti = () => {
+  const oldBurst = document.querySelector(".confetti-burst");
+  if (oldBurst) oldBurst.remove();
+  const burst = document.createElement("div");
+  burst.className = "confetti-burst";
+  burst.setAttribute("aria-hidden", "true");
+  const colors = ["#ffd45c", "#ef3150", "#ff7aa8", "#58a9ff", "#34c982", "#ff8b38", "#8c69e8"];
+  for (let i = 0; i < 36; i += 1) {
+    const piece = document.createElement("i");
+    const direction = i % 2 === 0 ? -1 : 1;
+    const distance = 70 + Math.random() * 190;
+    const endX = direction * distance;
+    piece.className = `confetti-piece${i % 5 === 0 ? " is-round" : ""}`;
+    piece.style.setProperty("--confetti-color", colors[i % colors.length]);
+    piece.style.setProperty("--mid-x", `${endX * .58}px`);
+    piece.style.setProperty("--mid-y", `${-(45 + Math.random() * 100)}px`);
+    piece.style.setProperty("--end-x", `${endX}px`);
+    piece.style.setProperty("--end-y", `${260 + Math.random() * 310}px`);
+    piece.style.setProperty("--mid-rot", `${direction * (80 + Math.random() * 180)}deg`);
+    piece.style.setProperty("--end-rot", `${direction * (360 + Math.random() * 540)}deg`);
+    piece.style.setProperty("--duration", `${1.15 + Math.random() * .65}s`);
+    piece.style.setProperty("--delay", `${Math.random() * .16}s`);
+    burst.appendChild(piece);
+  }
+  document.querySelector(".feedback-wrap").appendChild(burst);
+  window.setTimeout(() => burst.remove(), 2100);
+};
+
 const showStory = () => {
   const q = questions[current];
   $("storyNo").textContent = current + 1;
@@ -162,6 +190,7 @@ const chooseAnswer = (index, button) => {
     $("analysisText").textContent = `解析：${q.analysis}`;
     $("nextBtn").textContent = current === questions.length - 1 ? "查看成绩" : "挑战下一关";
     feedback.hidden = false;
+    if (correct) launchConfetti();
     $("nextBtn").focus({preventScroll: true});
   }, 340);
 };
