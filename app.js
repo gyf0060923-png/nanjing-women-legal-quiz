@@ -57,8 +57,8 @@ let starting = false;
 let questionsPreloaded = false;
 
 const backgroundMusic = new Audio("./assets/background-music-v2.mp3");
-const correctSound = new Audio("./assets/correct.mp3");
-const wrongSound = new Audio("./assets/wrong.mp3");
+const correctSound = new Audio("./assets/correct-v2.mp3");
+const wrongSound = new Audio("./assets/wrong-v2.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.preload = "auto";
 backgroundMusic.volume = .32;
@@ -70,7 +70,7 @@ wrongSound.preload = "auto";
 wrongSound.volume = .9;
 
 const scene = (name) => {
-  $("app").classList.toggle("is-cover", name === "cover-v4.webp");
+  $("app").classList.toggle("is-cover", name === "cover-v7.webp");
   backdrop.style.opacity = ".15";
   window.setTimeout(() => {
     backdrop.style.backgroundImage = `url("./assets/${name}")`;
@@ -185,7 +185,7 @@ const chooseAnswer = (index, button) => {
   window.setTimeout(() => {
     feedback.classList.toggle("is-wrong", !correct);
     $("face").innerHTML = correct
-      ? '<span class="party-emoji">🎉</span>'
+      ? '<span class="happy-face">🥳</span><span class="face-star star-one">★</span><span class="face-star star-two">★</span><span class="face-star star-three">★</span>'
       : "🥺";
     $("feedbackTitle").textContent = correct ? "答对啦" : "答错啦";
     $("correctAnswer").textContent = String.fromCharCode(65 + q.answer);
@@ -203,7 +203,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v4.webp");
+  scene("cover-v7.webp");
   showScreen(resultScreen);
 };
 
@@ -275,4 +275,5 @@ document.addEventListener("WeixinJSBridgeReady", startMusic, { once: true });
 ["pointerdown", "touchstart", "click"].forEach((eventName) => {
   document.addEventListener(eventName, startMusic, { once: true, capture: true });
 });
-scene("cover-v4.webp");
+scene("cover-v7.webp");
+
