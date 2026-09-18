@@ -102,11 +102,12 @@ const unlockEffects = () => {
   }
 };
 
-const loadImage = (name) => {
-  if (imageCache.has(name)) return imageCache.get(name);
+const loadImage = (name, priority = "auto") => {
+  if (imageCache.has(name)) return imageCache.get(name).promise;
+  const image = new Image();
+  image.decoding = "async";
+  image.fetchPriority = priority;
   const promise = new Promise((resolve) => {
-    const image = new Image();
-    image.decoding = "async";
     image.onload = () => {
       if (image.decode) image.decode().catch(() => {}).finally(resolve);
       else resolve();
@@ -114,7 +115,7 @@ const loadImage = (name) => {
     image.onerror = resolve;
     image.src = `./assets/${name}`;
   });
-  imageCache.set(name, promise);
+  imageCache.set(name, { image, promise });
   return promise;
 };
 
@@ -138,24 +139,23 @@ const startMusic = () => {
   backgroundMusic.play().catch(() => {});
 };
 
+backgroundMusic.addEventListener("ended", () => {
+  if (!soundOn) return;
+  backgroundMusic.currentTime = 0;
+  startMusic();
+});
+
 const questionImage = (index) =>
   `question-${index + 1}-${index === 0 || index === 4 ? "v3" : "v2"}.webp`;
 
 const preloadQuestions = () => {
   if (questionsPreloaded) return;
   questionsPreloaded = true;
-  loadImage(questionImage(0));
-  let index = 1;
-  const preloadNext = () => {
-    if (index >= questions.length) return;
-    loadImage(questionImage(index)).finally(() => {
-      index += 1;
-      if ("requestIdleCallback" in window) requestIdleCallback(preloadNext, { timeout: 1200 });
-      else window.setTimeout(preloadNext, 180);
-    });
-  };
-  if ("requestIdleCallback" in window) requestIdleCallback(preloadNext, { timeout: 900 });
-  else window.setTimeout(preloadNext, 220);
+  (async () => {
+    for (let index = 0; index < questions.length; index += 1) {
+      await loadImage(questionImage(index), index === 0 ? "high" : "auto");
+    }
+  })();
 };
 
 const stopMusic = () => {
@@ -221,11 +221,20 @@ const launchConfetti = () => {
 
 const showStory = () => {
   const q = questions[current];
+  const storyIndex = current;
+  const imageName = questionImage(current);
+  const storyFrame = document.querySelector(".story-frame");
   $("storyNo").textContent = current + 1;
   $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
-  $("storyImage").src = `./assets/${questionImage(current)}`;
   $("storyImage").alt = `第${current + 1}关${q.category}插画`;
-  scene(questionImage(current));
+  storyFrame.classList.add("is-loading");
+  loadImage(imageName, "high").then(() => {
+    if (current !== storyIndex) return;
+    $("storyImage").src = `./assets/${imageName}`;
+    requestAnimationFrame(() => storyFrame.classList.remove("is-loading"));
+    if (storyIndex + 1 < questions.length) loadImage(questionImage(storyIndex + 1), "low");
+  });
+  scene(imageName);
   showScreen(storyScreen);
 };
 
@@ -364,6 +373,9 @@ document.addEventListener("WeixinJSBridgeReady", () => {
   startMusic();
   unlockEffects();
 }, { once: true });
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && soundOn) startMusic();
+});
 ["pointerdown", "touchstart", "click"].forEach((eventName) => {
   document.addEventListener(eventName, () => {
     startMusic();

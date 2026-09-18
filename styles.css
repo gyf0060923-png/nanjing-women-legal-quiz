@@ -100,7 +100,10 @@ button { font: inherit; }
   overflow: hidden; border-radius: 27px; border: 2px solid rgba(255,255,255,.9);
   background: #edf7ff; box-shadow: 0 22px 54px rgba(67,0,10,.28);
 }
-.story-frame img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+.story-frame img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; opacity: 1; transition: opacity .2s ease; }
+.story-frame::after { content: "插画加载中…"; position: absolute; inset: 0; display: grid; place-items: center; color: #8b4650; font-size: .9rem; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+.story-frame.is-loading img { opacity: 0; }
+.story-frame.is-loading::after { opacity: 1; }
 .story-btn { flex: 0 0 auto; min-height: 56px; width: min(86%, 390px); margin-top: 13px; display: flex; align-items: center; justify-content: center; gap: 16px; }
 .story-btn b { font-size: 1.8rem; line-height: 1; }
 .quiz { justify-content: flex-start; }
