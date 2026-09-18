@@ -60,7 +60,7 @@ const backgroundMusic = new Audio("./assets/background-music-v2.mp3");
 const correctSound = new Audio("./assets/correct-v2.mp3");
 const wrongSound = new Audio("./assets/wrong-v2.mp3");
 backgroundMusic.loop = true;
-backgroundMusic.preload = "auto";
+backgroundMusic.preload = "metadata";
 backgroundMusic.volume = .32;
 backgroundMusic.autoplay = true;
 backgroundMusic.playsInline = true;
@@ -75,6 +75,8 @@ let effectDataPromise = null;
 let effectDecodePromise = null;
 let effectBuffers = null;
 let musicRestoreTimer = 0;
+let sceneRequest = 0;
+const imageCache = new Map();
 
 const preloadEffectData = () => {
   if (effectDataPromise) return effectDataPromise;
@@ -100,13 +102,31 @@ const unlockEffects = () => {
   }
 };
 
+const loadImage = (name) => {
+  if (imageCache.has(name)) return imageCache.get(name);
+  const promise = new Promise((resolve) => {
+    const image = new Image();
+    image.decoding = "async";
+    image.onload = () => {
+      if (image.decode) image.decode().catch(() => {}).finally(resolve);
+      else resolve();
+    };
+    image.onerror = resolve;
+    image.src = `./assets/${name}`;
+  });
+  imageCache.set(name, promise);
+  return promise;
+};
+
 const scene = (name) => {
+  const request = ++sceneRequest;
   $("app").classList.toggle("is-cover", name === "cover-v8-hd.webp");
   backdrop.style.opacity = ".15";
-  window.setTimeout(() => {
+  loadImage(name).then(() => {
+    if (request !== sceneRequest) return;
     backdrop.style.backgroundImage = `url("./assets/${name}")`;
-    backdrop.style.opacity = "1";
-  }, 140);
+    requestAnimationFrame(() => { backdrop.style.opacity = "1"; });
+  });
 };
 
 const showScreen = (screen) => {
@@ -124,10 +144,18 @@ const questionImage = (index) =>
 const preloadQuestions = () => {
   if (questionsPreloaded) return;
   questionsPreloaded = true;
-  questions.forEach((_, index) => {
-    const image = new Image();
-    image.src = `./assets/${questionImage(index)}`;
-  });
+  loadImage(questionImage(0));
+  let index = 1;
+  const preloadNext = () => {
+    if (index >= questions.length) return;
+    loadImage(questionImage(index)).finally(() => {
+      index += 1;
+      if ("requestIdleCallback" in window) requestIdleCallback(preloadNext, { timeout: 1200 });
+      else window.setTimeout(preloadNext, 180);
+    });
+  };
+  if ("requestIdleCallback" in window) requestIdleCallback(preloadNext, { timeout: 900 });
+  else window.setTimeout(preloadNext, 220);
 };
 
 const stopMusic = () => {
@@ -169,7 +197,8 @@ const launchConfetti = () => {
   burst.className = "confetti-burst";
   burst.setAttribute("aria-hidden", "true");
   const colors = ["#ffd45c", "#ef3150", "#ff7aa8", "#58a9ff", "#34c982", "#ff8b38", "#8c69e8"];
-  for (let i = 0; i < 36; i += 1) {
+  const pieceCount = window.innerWidth < 760 ? 26 : 36;
+  for (let i = 0; i < pieceCount; i += 1) {
     const piece = document.createElement("i");
     const direction = i % 2 === 0 ? -1 : 1;
     const distance = 70 + Math.random() * 190;
@@ -231,7 +260,6 @@ const chooseAnswer = (index, button) => {
   button.classList.add("is-selected");
   document.querySelectorAll(".answer").forEach((item) => item.disabled = true);
   if (correct) score += 1;
-  tone(correct);
 
   window.setTimeout(() => {
     feedback.classList.toggle("is-wrong", !correct);
@@ -243,6 +271,7 @@ const chooseAnswer = (index, button) => {
     $("analysisText").textContent = `解析：${q.analysis}`;
     $("nextBtn").textContent = current === questions.length - 1 ? "查看成绩" : "挑战下一关";
     feedback.hidden = false;
+    tone(correct);
     if (correct) launchConfetti();
     $("nextBtn").focus({preventScroll: true});
   }, 340);

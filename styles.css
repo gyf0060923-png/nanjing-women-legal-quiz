@@ -27,6 +27,7 @@ button { font: inherit; }
   transition: opacity .18s ease;
   transform: scale(1.03);
   animation: drift 12s ease-in-out infinite alternate;
+  will-change: opacity;
 }
 
 .wash {
@@ -197,6 +198,11 @@ button { font: inherit; }
 @media (min-width: 760px) {
   .app { max-width: 560px; min-height: min(100svh, 1000px); margin: 0 auto; box-shadow: 0 0 80px rgba(45,0,7,.38); }
   body { display: grid; place-items: center; background: radial-gradient(circle,#d9b8ae,#7f0b18); }
+}
+
+@media (max-width: 759px) {
+  .sound, .question-card, .feedback-shade { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .question-card { background: rgba(255,250,242,.98); }
 }
 
 @media (max-height: 700px) {
