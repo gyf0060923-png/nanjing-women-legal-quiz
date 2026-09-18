@@ -69,6 +69,37 @@ correctSound.volume = .9;
 wrongSound.preload = "auto";
 wrongSound.volume = .9;
 
+const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+let effectContext = null;
+let effectDataPromise = null;
+let effectDecodePromise = null;
+let effectBuffers = null;
+let musicRestoreTimer = 0;
+
+const preloadEffectData = () => {
+  if (effectDataPromise) return effectDataPromise;
+  effectDataPromise = Promise.all([
+    fetch("./assets/correct-v2.mp3", { cache: "force-cache" }).then((response) => response.arrayBuffer()),
+    fetch("./assets/wrong-v2.mp3", { cache: "force-cache" }).then((response) => response.arrayBuffer())
+  ]).catch(() => null);
+  return effectDataPromise;
+};
+
+const unlockEffects = () => {
+  if (!AudioContextClass) return;
+  if (!effectContext) effectContext = new AudioContextClass();
+  if (effectContext.state === "suspended") effectContext.resume().catch(() => {});
+  if (!effectDecodePromise) {
+    effectDecodePromise = preloadEffectData().then((data) => {
+      if (!data) return null;
+      return Promise.all(data.map((buffer) => effectContext.decodeAudioData(buffer.slice(0))));
+    }).then((buffers) => {
+      effectBuffers = buffers;
+      return buffers;
+    }).catch(() => null);
+  }
+};
+
 const scene = (name) => {
   $("app").classList.toggle("is-cover", name === "cover-v8-hd.webp");
   backdrop.style.opacity = ".15";
@@ -109,7 +140,24 @@ const stopMusic = () => {
 
 const tone = (correct) => {
   if (!soundOn) return;
+  unlockEffects();
+  window.clearTimeout(musicRestoreTimer);
+  backgroundMusic.volume = .1;
+  musicRestoreTimer = window.setTimeout(() => { backgroundMusic.volume = .32; }, 1350);
+
+  const buffer = effectBuffers?.[correct ? 0 : 1];
+  if (buffer && effectContext?.state === "running") {
+    const source = effectContext.createBufferSource();
+    const gain = effectContext.createGain();
+    source.buffer = buffer;
+    gain.gain.value = .95;
+    source.connect(gain).connect(effectContext.destination);
+    source.start(0);
+    return;
+  }
+
   const effect = correct ? correctSound : wrongSound;
+  effect.pause();
   effect.currentTime = 0;
   effect.play().catch(() => {});
 };
@@ -219,6 +267,7 @@ $("startBtn").addEventListener("click", () => {
   button.disabled = true;
   button.classList.add("is-loading");
   startMusic();
+  unlockEffects();
   preloadQuestions();
 
   const startedAt = performance.now();
@@ -269,14 +318,29 @@ $("soundBtn").addEventListener("click", (event) => {
   soundOn = !soundOn;
   event.currentTarget.setAttribute("aria-pressed", String(soundOn));
   event.currentTarget.setAttribute("aria-label", soundOn ? "关闭音效" : "开启音效");
-  if (soundOn) startMusic();
+  if (soundOn) {
+    startMusic();
+    unlockEffects();
+  }
   else stopMusic();
 });
 
-window.addEventListener("load", startMusic, { once: true });
-document.addEventListener("WeixinJSBridgeReady", startMusic, { once: true });
+window.addEventListener("load", () => {
+  preloadEffectData();
+  correctSound.load();
+  wrongSound.load();
+  startMusic();
+}, { once: true });
+document.addEventListener("WeixinJSBridgeReady", () => {
+  startMusic();
+  unlockEffects();
+}, { once: true });
 ["pointerdown", "touchstart", "click"].forEach((eventName) => {
-  document.addEventListener(eventName, startMusic, { once: true, capture: true });
+  document.addEventListener(eventName, () => {
+    startMusic();
+    unlockEffects();
+  }, { once: true, capture: true });
 });
+preloadEffectData();
 scene("cover-v8-hd.webp");
 
