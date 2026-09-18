@@ -87,12 +87,15 @@ const startMusic = () => {
   backgroundMusic.play().catch(() => {});
 };
 
+const questionImage = (index) =>
+  `question-${index + 1}-${index === 0 || index === 4 ? "v3" : "v2"}.webp`;
+
 const preloadQuestions = () => {
   if (questionsPreloaded) return;
   questionsPreloaded = true;
   questions.forEach((_, index) => {
     const image = new Image();
-    image.src = `./assets/question-${index + 1}-v2.webp`;
+    image.src = `./assets/${questionImage(index)}`;
   });
 };
 
@@ -143,9 +146,9 @@ const showStory = () => {
   const q = questions[current];
   $("storyNo").textContent = current + 1;
   $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
-  $("storyImage").src = `./assets/question-${current + 1}-v2.webp`;
+  $("storyImage").src = `./assets/${questionImage(current)}`;
   $("storyImage").alt = `第${current + 1}关${q.category}插画`;
-  scene(`question-${current + 1}-v2.webp`);
+  scene(questionImage(current));
   showScreen(storyScreen);
 };
 
@@ -169,7 +172,7 @@ const renderQuestion = () => {
   const card = $("questionCard");
   card.classList.remove("enter");
   requestAnimationFrame(() => card.classList.add("enter"));
-  scene(`question-${current + 1}-v2.webp`);
+  scene(questionImage(current));
 };
 
 const chooseAnswer = (index, button) => {
