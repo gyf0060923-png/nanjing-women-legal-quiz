@@ -145,17 +145,14 @@ backgroundMusic.addEventListener("ended", () => {
   startMusic();
 });
 
-const questionImage = (index) =>
-  `question-${index + 1}-${index === 0 || index === 4 ? "v3" : "v2"}.webp`;
+const questionImage = (index) => `question-${index + 1}-v3.webp`;
 
 const preloadQuestions = () => {
   if (questionsPreloaded) return;
   questionsPreloaded = true;
-  (async () => {
-    for (let index = 0; index < questions.length; index += 1) {
-      await loadImage(questionImage(index), index === 0 ? "high" : "auto");
-    }
-  })();
+  questions.forEach((_, index) => {
+    loadImage(questionImage(index), index < 2 ? "high" : "auto");
+  });
 };
 
 const stopMusic = () => {
@@ -365,6 +362,7 @@ $("soundBtn").addEventListener("click", (event) => {
 
 window.addEventListener("load", () => {
   preloadEffectData();
+  preloadQuestions();
   correctSound.load();
   wrongSound.load();
   startMusic();
