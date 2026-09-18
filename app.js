@@ -56,7 +56,7 @@ let soundOn = true;
 let starting = false;
 let questionsPreloaded = false;
 
-const backgroundMusic = new Audio("./assets/background-music.mp3");
+const backgroundMusic = new Audio("./assets/background-music-v2.mp3");
 const correctSound = new Audio("./assets/correct.mp3");
 const wrongSound = new Audio("./assets/wrong.mp3");
 backgroundMusic.loop = true;
