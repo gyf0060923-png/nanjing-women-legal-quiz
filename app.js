@@ -121,7 +121,7 @@ const loadImage = (name, priority = "auto") => {
 
 const scene = (name) => {
   const request = ++sceneRequest;
-  $("app").classList.toggle("is-cover", name === "cover-v8-hd.webp");
+  $("app").classList.toggle("is-cover", name === "cover-v9-hd.webp");
   backdrop.style.opacity = ".15";
   loadImage(name).then(() => {
     if (request !== sceneRequest) return;
@@ -145,7 +145,7 @@ backgroundMusic.addEventListener("ended", () => {
   startMusic();
 });
 
-const questionImage = (index) => `question-${index + 1}-v3.webp`;
+const questionImage = (index) => `question-${index + 1}-${index === 4 ? "v4" : "v3"}.webp`;
 
 const preloadQuestions = () => {
   if (questionsPreloaded) return;
@@ -289,7 +289,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v8-hd.webp");
+  scene("cover-v9-hd.webp");
   showScreen(resultScreen);
 };
 
@@ -381,5 +381,5 @@ document.addEventListener("visibilitychange", () => {
   }, { once: true, capture: true });
 });
 preloadEffectData();
-scene("cover-v8-hd.webp");
+scene("cover-v9-hd.webp");
 
