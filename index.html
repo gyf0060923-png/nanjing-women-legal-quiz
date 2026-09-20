@@ -11,7 +11,7 @@
   <title>南京妇联·巾帼普法基层行</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23b51224'/%3E%3Cpath d='M19 18h26v28H19z' fill='%23fff8ed'/%3E%3Cpath d='M24 25h16M24 32h16M24 39h10' stroke='%23b51224' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preload" as="image" href="./assets/cover-v10-hd.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="./styles.css?v=20260920-22">
+  <link rel="stylesheet" href="./styles.css?v=20260920-23">
 </head>
 <body>
   <main class="app" id="app">
@@ -25,12 +25,14 @@
       <div class="cover-logo" style="padding:0;background:none;border-radius:0;box-shadow:none" aria-label="南京市妇女联合会">
         <img src="./assets/nanjing-women-logo.png?v=20260917-2" alt="南京市妇女联合会" decoding="async">
       </div>
+      <p class="cover-brand">巾帼普法基层行</p>
       <div class="intro-copy">
-        <h1 id="introTitle">巾帼普法基层行</h1>
+        <h1 id="introTitle">新业态就业女性<br>法律法规知多少？</h1>
+        <p class="intro-challenge">快来！闯关测试！</p>
       </div>
       <button class="primary-btn start-btn" id="startBtn" type="button" aria-live="polite">
         <i class="start-progress" id="startProgress" aria-hidden="true"></i>
-        <span id="startLabel">开始答题</span><b id="startArrow" aria-hidden="true">›</b>
+        <span id="startLabel">开始挑战</span><b id="startArrow" aria-hidden="true">›</b>
       </button>
     </section>
 
@@ -41,6 +43,7 @@
       </header>
       <div class="progress-track story-track" aria-hidden="true"><span id="storyProgressBar"></span></div>
       <figure class="story-frame">
+        <div class="level-badge story-level-badge" id="storyLevelBadge">第一关</div>
         <img id="storyImage" src="./assets/question-1-v3.webp" alt="第一关情景插画" decoding="async" fetchpriority="high">
       </figure>
       <button class="primary-btn story-btn" id="enterQuestionBtn" type="button">进入答题 <b aria-hidden="true">›</b></button>
@@ -54,6 +57,7 @@
       <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
 
       <article class="question-card" id="questionCard">
+        <div class="level-badge quiz-level-badge" id="quizLevelBadge">第一关</div>
         <h2 id="questionText"></h2>
         <div class="answers" id="answers"></div>
       </article>
@@ -87,7 +91,7 @@
       </div>
     </div>
   </main>
-    <script src="./app.js?v=20260920-30"></script>
+    <script src="./app.js?v=20260920-31"></script>
 </body>
 </html>
 

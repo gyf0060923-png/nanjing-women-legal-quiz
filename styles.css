@@ -71,10 +71,12 @@ button { font: inherit; }
   filter: drop-shadow(0 5px 10px rgba(56,65,97,.18));
 }
 .cover-logo img { display: block; width: 100%; height: auto; }
-.intro-copy { width: min(100%, 520px); margin-top: clamp(24px, 4.5vh, 54px); text-align: center; }
+.cover-brand { position: absolute; top: max(30px, env(safe-area-inset-top)); right: 76px; margin: 0; color: #86202a; font-weight: 900; font-size: clamp(.82rem,3vw,1rem); letter-spacing: .08em; text-shadow: 0 1px 4px rgba(255,255,255,.9); }
+.intro-copy { width: min(100%, 520px); margin-top: clamp(42px, 7vh, 82px); text-align: center; }
 .eyebrow { margin: 0 0 8px; font-weight: 800; letter-spacing: .24em; color: #b11227; }
-.intro h1 { margin: 0; color: #fffdf7; font-size: clamp(2.1rem, 10vw, 4rem); line-height: 1.18; letter-spacing: -.01em; font-weight: 900; white-space: nowrap; -webkit-text-stroke: 3px #ad2832; paint-order: stroke fill; text-shadow: 0 4px 0 #8f1c27, 0 9px 20px rgba(85,0,10,.22); }
+.intro h1 { margin: 0; color: #fffdf7; font-size: clamp(2rem, 8.2vw, 3.35rem); line-height: 1.24; letter-spacing: -.01em; font-weight: 900; white-space: nowrap; -webkit-text-stroke: 3px #ad2832; paint-order: stroke fill; text-shadow: 0 4px 0 #8f1c27, 0 9px 20px rgba(85,0,10,.22); }
 .intro h1 span { color: inherit; }
+.intro-challenge { display: inline-block; margin: 18px 0 0; padding: 8px 22px; border-radius: 999px; color: #fff9eb; background: rgba(165,14,34,.9); border: 2px solid rgba(255,223,157,.9); box-shadow: 0 8px 22px rgba(86,0,13,.24); font-weight: 900; font-size: clamp(1rem,4.4vw,1.35rem); letter-spacing: .08em; }
 .intro-lead { max-width: 390px; margin: 22px auto 0; line-height: 1.8; font-size: 1rem; color: #6f3438; }
 .seal { margin-top: 4.5vh; display: grid; place-items: center; width: 128px; height: 128px; border-radius: 50%; color: #fff7e9; background: linear-gradient(145deg,#cf2336,#8f0718); border: 4px solid #f5c777; box-shadow: 0 0 0 7px rgba(255,247,232,.65),0 18px 42px rgba(89,0,11,.28); animation: float 3s ease-in-out infinite; }
 .seal span { font-family: serif; font-size: 3.6rem; font-weight: 800; line-height: .9; }
@@ -100,6 +102,8 @@ button { font: inherit; }
   overflow: hidden; border-radius: 27px; border: 2px solid rgba(255,255,255,.9);
   background: #edf7ff; box-shadow: 0 22px 54px rgba(67,0,10,.28);
 }
+.level-badge { position: relative; z-index: 3; width: fit-content; padding: 7px 20px; border-radius: 7px 7px 16px 7px; color: #fff8e9; background: linear-gradient(135deg,#c71f35,#991124); border: 2px solid #f6d18a; box-shadow: 0 6px 16px rgba(71,0,10,.3); font-size: .92rem; font-weight: 900; letter-spacing: .13em; }
+.story-level-badge { position: absolute; top: 14px; left: 14px; }
 .story-frame img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; opacity: 1; transition: opacity .2s ease; }
 .story-frame::after { content: "插画加载中…"; position: absolute; inset: 0; display: grid; place-items: center; color: #8b4650; font-size: .9rem; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
 .story-frame.is-loading img { opacity: 0; }
@@ -114,11 +118,13 @@ button { font: inherit; }
 .progress-track span { display: block; width: 20%; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#8e071a,#e43e50); transition: width .45s ease; }
 
 .question-card {
+  position: relative;
   width: min(100%, 520px); max-height: calc(100svh - 155px); overflow: auto; overscroll-behavior: contain;
   margin-top: auto;
   padding: clamp(23px,6vw,36px); border-radius: 28px; background: rgba(255,250,242,.94); border: 1px solid rgba(255,255,255,.9);
   box-shadow: 0 24px 70px rgba(79,0,11,.28); backdrop-filter: blur(12px);
 }
+.quiz-level-badge { margin: -10px 0 18px -10px; }
 .question-card.enter { animation: cardIn .46s ease both; }
 .question-card h2 { margin: 0; font-size: clamp(1.14rem,4.7vw,1.45rem); line-height: 1.72; font-weight: 800; color: #3f2024; }
 .answers { display: grid; gap: 13px; margin-top: 24px; }
@@ -207,8 +213,9 @@ button { font: inherit; }
 }
 
 @media (max-height: 700px) {
-  .intro-copy { margin-top: 5vh; }
-  .intro h1 { font-size: clamp(2.1rem, 10vw, 3.3rem); }
+  .intro-copy { margin-top: 4vh; }
+  .intro h1 { font-size: clamp(1.8rem, 7.8vw, 2.85rem); }
+  .intro-challenge { margin-top: 10px; }
   .intro-lead { margin-top: 12px; line-height: 1.55; }
   .question-card { padding: 20px; }
   .analysis-card { max-height: 52svh; }

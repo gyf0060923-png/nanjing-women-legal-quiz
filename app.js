@@ -141,6 +141,7 @@ backgroundMusic.addEventListener("ended", () => {
 });
 
 const questionImage = (index) => `question-${index + 1}-${index === 4 ? "v5" : "v3"}.webp`;
+const levelNames = ["第一关", "第二关", "第三关", "第四关", "第五关"];
 
 const preloadQuestions = () => {
   if (questionsPreloaded) return;
@@ -217,6 +218,7 @@ const showStory = () => {
   const imageName = questionImage(current);
   const storyFrame = document.querySelector(".story-frame");
   $("storyNo").textContent = current + 1;
+  $("storyLevelBadge").textContent = levelNames[current] || `第${current + 1}关`;
   $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
   $("storyImage").alt = `第${current + 1}关${q.category}插画`;
   storyFrame.classList.add("is-loading");
@@ -234,6 +236,7 @@ const renderQuestion = () => {
   const q = questions[current];
   locked = false;
   $("currentNo").textContent = current + 1;
+  $("quizLevelBadge").textContent = levelNames[current] || `第${current + 1}关`;
   $("progressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
   $("questionText").textContent = q.question;
   $("answers").replaceChildren(...q.options.map((text, index) => {
@@ -317,7 +320,7 @@ $("startBtn").addEventListener("click", () => {
         button.disabled = false;
         button.classList.remove("is-loading");
         fill.style.width = "0";
-        label.textContent = "开始答题";
+        label.textContent = "开始挑战";
       }, 450);
     }, 130);
   };
