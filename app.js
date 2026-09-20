@@ -141,7 +141,7 @@ backgroundMusic.addEventListener("ended", () => {
 });
 
 const questionImage = (index) => `question-${index + 1}-${index === 4 ? "v5" : "v3"}.webp`;
-const levelNames = ["第一关", "第二关", "第三关", "第四关", "第五关"];
+const levelNames = ["关卡一", "关卡二", "关卡三", "关卡四", "关卡五"];
 
 const preloadQuestions = () => {
   if (questionsPreloaded) return;
@@ -218,6 +218,7 @@ const showStory = () => {
   const imageName = questionImage(current);
   const storyFrame = document.querySelector(".story-frame");
   $("storyNo").textContent = current + 1;
+  $("storyLevelCaption").textContent = `【${levelNames[current] || `关卡${current + 1}`}】`;
   $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
   $("storyImage").alt = `第${current + 1}关${q.category}插画`;
   storyFrame.classList.add("is-loading");
@@ -235,7 +236,7 @@ const renderQuestion = () => {
   const q = questions[current];
   locked = false;
   $("currentNo").textContent = current + 1;
-  $("quizLevelBadge").textContent = levelNames[current] || `第${current + 1}关`;
+  $("quizLevelBadge").textContent = `【${levelNames[current] || `关卡${current + 1}`}】`;
   $("progressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
   $("questionText").textContent = q.question;
   $("answers").replaceChildren(...q.options.map((text, index) => {
