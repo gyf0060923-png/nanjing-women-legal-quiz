@@ -67,7 +67,7 @@ button { font: inherit; }
 
 .intro { justify-content: flex-start; }
 .cover-logo {
-  align-self: flex-start; width: clamp(84px, 24vw, 120px); margin-top: 2px;
+  align-self: flex-start; width: clamp(66px, 18vw, 92px); margin-top: 2px;
   filter: drop-shadow(0 5px 10px rgba(56,65,97,.18));
 }
 .cover-logo img { display: block; width: 100%; height: auto; }
