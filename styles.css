@@ -95,7 +95,7 @@ button { font: inherit; }
 .start-btn.is-loading { cursor: wait; }
 .start-btn.is-loading b { opacity: 0; transform: translateX(10px); }
 .story { justify-content: flex-start; padding-left: 14px; padding-right: 14px; }
-.story-head { width: min(100%, 520px); padding: 0 54px 0 8px; display: flex; align-items: center; justify-content: space-between; }
+.story-head { width: min(100%, 520px); padding: 0 54px 0 8px; display: flex; align-items: center; justify-content: flex-end; }
 .story-track { margin-bottom: 12px; }
 .story-frame {
   position: relative; width: min(100%, 500px); flex: 1 1 auto; min-height: 0; margin: 0;
@@ -111,7 +111,7 @@ button { font: inherit; }
 .story-btn { flex: 0 0 auto; min-height: 56px; width: min(86%, 390px); margin-top: 13px; display: flex; align-items: center; justify-content: center; gap: 16px; }
 .story-btn b { font-size: 1.8rem; line-height: 1; }
 .quiz { justify-content: flex-start; }
-.quiz-head { width: min(100%, 520px); padding-right: 54px; display: flex; align-items: center; justify-content: space-between; }
+.quiz-head { width: min(100%, 520px); padding-right: 54px; display: flex; align-items: center; justify-content: flex-end; }
 .progress-copy { color: #81101e; font-weight: 800; background: rgba(255,249,238,.88); border-radius: 99px; padding: 8px 13px; box-shadow: 0 8px 20px rgba(83,0,9,.12); }
 .progress-copy span { color: #c2152b; font-size: 1.16rem; }
 .progress-track { width: min(100%,520px); height: 7px; margin: 15px 0 22px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.58); }

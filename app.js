@@ -217,7 +217,6 @@ const showStory = () => {
   const storyIndex = current;
   const imageName = questionImage(current);
   const storyFrame = document.querySelector(".story-frame");
-  $("storyNo").textContent = current + 1;
   $("storyLevelCaption").textContent = `【${levelNames[current] || `关卡${current + 1}`}】`;
   $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
   $("storyImage").alt = `第${current + 1}关${q.category}插画`;
@@ -235,7 +234,6 @@ const showStory = () => {
 const renderQuestion = () => {
   const q = questions[current];
   locked = false;
-  $("currentNo").textContent = current + 1;
   $("quizLevelBadge").textContent = `【${levelNames[current] || `关卡${current + 1}`}】`;
   $("progressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
   $("questionText").textContent = q.question;
