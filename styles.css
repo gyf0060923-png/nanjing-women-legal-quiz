@@ -120,8 +120,6 @@ button { font: inherit; }
   box-shadow: 0 24px 70px rgba(79,0,11,.28); backdrop-filter: blur(12px);
 }
 .question-card.enter { animation: cardIn .46s ease both; }
-.category { display: inline-flex; padding: 7px 13px; border-radius: 10px; color: #fff; background: #ba1429; font-size: .82rem; font-weight: 800; letter-spacing: .06em; }
-.source { margin: 10px 0 18px; color: #96666b; font-size: .78rem; line-height: 1.5; }
 .question-card h2 { margin: 0; font-size: clamp(1.14rem,4.7vw,1.45rem); line-height: 1.72; font-weight: 800; color: #3f2024; }
 .answers { display: grid; gap: 13px; margin-top: 24px; }
 .answer {
