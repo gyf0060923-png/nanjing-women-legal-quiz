@@ -51,7 +51,7 @@ let soundOn = true;
 let starting = false;
 let questionsPreloaded = false;
 
-const backgroundMusic = new Audio("./assets/background-music-v3.mp3?v=20260920");
+const backgroundMusic = new Audio("./assets/background-music-v2.mp3?v=20260920-restore");
 const correctSound = new Audio("./assets/correct-v2.mp3");
 const wrongSound = new Audio("./assets/wrong-v2.mp3");
 backgroundMusic.loop = true;
@@ -116,7 +116,7 @@ const loadImage = (name, priority = "auto") => {
 
 const scene = (name) => {
   const request = ++sceneRequest;
-  $("app").classList.toggle("is-cover", name === "cover-v9-hd.webp");
+  $("app").classList.toggle("is-cover", name === "cover-v10-hd.webp");
   backdrop.style.opacity = ".15";
   loadImage(name).then(() => {
     if (request !== sceneRequest) return;
@@ -282,7 +282,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v9-hd.webp");
+  scene("cover-v10-hd.webp");
   showScreen(resultScreen);
 };
 
@@ -376,5 +376,5 @@ document.addEventListener("visibilitychange", () => {
 preloadEffectData();
 backgroundMusic.load();
 startMusic();
-scene("cover-v9-hd.webp");
+scene("cover-v10-hd.webp");
 
