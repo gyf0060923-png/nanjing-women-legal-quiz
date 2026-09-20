@@ -103,7 +103,6 @@ button { font: inherit; }
   background: #edf7ff; box-shadow: 0 22px 54px rgba(67,0,10,.28);
 }
 .level-badge { position: relative; z-index: 3; width: fit-content; padding: 7px 20px; border-radius: 7px 7px 16px 7px; color: #fff8e9; background: linear-gradient(135deg,#c71f35,#991124); border: 2px solid #f6d18a; box-shadow: 0 6px 16px rgba(71,0,10,.3); font-size: .92rem; font-weight: 900; letter-spacing: .13em; }
-.story-level-badge { position: absolute; top: 14px; left: 14px; }
 .story-frame img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; opacity: 1; transition: opacity .2s ease; }
 .story-frame::after { content: "插画加载中…"; position: absolute; inset: 0; display: grid; place-items: center; color: #8b4650; font-size: .9rem; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
 .story-frame.is-loading img { opacity: 0; }

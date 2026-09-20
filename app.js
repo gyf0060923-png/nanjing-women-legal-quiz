@@ -218,7 +218,6 @@ const showStory = () => {
   const imageName = questionImage(current);
   const storyFrame = document.querySelector(".story-frame");
   $("storyNo").textContent = current + 1;
-  $("storyLevelBadge").textContent = levelNames[current] || `第${current + 1}关`;
   $("storyProgressBar").style.width = `${((current + 1) / questions.length) * 100}%`;
   $("storyImage").alt = `第${current + 1}关${q.category}插画`;
   storyFrame.classList.add("is-loading");
