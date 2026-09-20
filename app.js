@@ -51,11 +51,11 @@ let soundOn = true;
 let starting = false;
 let questionsPreloaded = false;
 
-const backgroundMusic = new Audio("./assets/background-music-v2.mp3");
+const backgroundMusic = new Audio("./assets/background-music-v3.mp3?v=20260920");
 const correctSound = new Audio("./assets/correct-v2.mp3");
 const wrongSound = new Audio("./assets/wrong-v2.mp3");
 backgroundMusic.loop = true;
-backgroundMusic.preload = "metadata";
+backgroundMusic.preload = "auto";
 backgroundMusic.volume = .32;
 backgroundMusic.autoplay = true;
 backgroundMusic.playsInline = true;
@@ -374,5 +374,7 @@ document.addEventListener("visibilitychange", () => {
   }, { once: true, capture: true });
 });
 preloadEffectData();
+backgroundMusic.load();
+startMusic();
 scene("cover-v9-hd.webp");
 
