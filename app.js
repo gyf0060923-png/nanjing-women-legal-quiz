@@ -8,14 +8,14 @@ const questions = [
   },
   {
     category: "合同相关维权",
-    question: "小王是一名女快递员，入职某快递公司的加盟网点，工作接受快递公司统一管理，未签订书面劳动合同，公司也未缴工伤保险。小王在派件途中发生交通事故受伤。下列说法正确的是（ ）？",
+    question: "小王是一名女快递员，入职某快递公司的加盟网点，工作接受快递公司统一管理，未签订书面劳动合同，公司也未缴工伤保险。小王在派件途中发生交通事故受伤。下列说法正确的是？",
     options: ["小王是加盟网点自己招的人，快递公司不用负责", "快递公司承担工伤赔偿责任"],
     answer: 1,
     analysis: "是否签订书面劳动合同，不影响事实劳动关系的认定。根据《中华人民共和国劳动合同法》第七条，用人单位自用工之日起即与劳动者建立劳动关系。《最高人民法院关于审理劳动争议案件适用法律问题的解释（二）》（法释〔2025〕12号）第一条明确规定，具备合法经营资格的承包人将承包业务转包或者分包给不具备合法经营资格的组织或者个人，该组织或者个人招用的劳动者请求确认承包人为承担用工主体责任单位，承担支付劳动报酬、认定工伤后的工伤保险待遇等责任的，人民法院依法予以支持。根据《工伤保险条例》第十条，用人单位应当按时缴纳工伤保险费，职工个人不缴纳工伤保险费；第六十二条第二款，依照本条例规定应当参加工伤保险而未参加工伤保险的用人单位职工发生工伤的，由该用人单位按照本条例规定的工伤保险待遇项目和标准支付费用。"
   },
   {
     category: "新就业形态维权",
-    question: "大学生小雪与某文化传媒公司签订《经济合作协议》，从事网络主播工作，协议中手写注明“本协议非劳动合同”。在职期间，小雪按照公司要求每日打卡、开会复盘，日均直播8小时以上。小雪离职后，公司以其离职为由要求她赔付30万元违约金。下列说法正确的是（ ）",
+    question: "大学生小雪与某文化传媒公司签订《经济合作协议》，从事网络主播工作，协议中手写注明“本协议非劳动合同”。在职期间，小雪按照公司要求每日打卡、开会复盘，日均直播8小时以上。小雪离职后，公司以其离职为由要求她赔付30万元违约金。下列说法正确的是？",
     options: ["小雪应承担违约责任", "公司无权要求小雪赔付违约金"],
     answer: 1,
     analysis: "劳动关系认定以用工事实为准，不以合同名称或双方约定为准。小雪接受考勤管理、服从工作安排，构成事实劳动关系。协议中“本协议非劳动合同”是公司单方拟定的格式条款，意在免除自身法定责任，依据《中华人民共和国民法典》第四百九十七条，该格式条款应属无效。根据《中华人民共和国劳动合同法》第二十五条，除服务期和竞业限制两种情形外，用人单位不得与劳动者约定由劳动者承担违约金。小雪离职不属于这两种情形，公司无权要求其支付30万元违约金。"
@@ -116,7 +116,7 @@ const loadImage = (name, priority = "auto") => {
 
 const scene = (name) => {
   const request = ++sceneRequest;
-  $("app").classList.toggle("is-cover", name === "cover-v10-hd.webp");
+  $("app").classList.toggle("is-cover", name === "cover-v11-hd.webp");
   backdrop.style.opacity = ".15";
   loadImage(name).then(() => {
     if (request !== sceneRequest) return;
@@ -283,7 +283,7 @@ const finish = () => {
   $("resultNote").textContent = score === 5
     ? "全部答对！每一次了解，都是守护自己与她人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v10-hd.webp");
+  scene("cover-v11-hd.webp");
   showScreen(resultScreen);
 };
 
@@ -318,7 +318,7 @@ $("startBtn").addEventListener("click", () => {
         button.disabled = false;
         button.classList.remove("is-loading");
         fill.style.width = "0";
-        label.textContent = "开始挑战";
+        label.textContent = "开始闯关";
       }, 450);
     }, 130);
   };
@@ -377,5 +377,5 @@ document.addEventListener("visibilitychange", () => {
 preloadEffectData();
 backgroundMusic.load();
 startMusic();
-scene("cover-v10-hd.webp");
+scene("cover-v11-hd.webp");
 
