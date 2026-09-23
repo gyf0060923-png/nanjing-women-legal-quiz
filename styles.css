@@ -71,7 +71,7 @@ button { font: inherit; }
   filter: drop-shadow(0 5px 10px rgba(56,65,97,.18));
 }
 .cover-logo img { display: block; width: 100%; height: auto; }
-.cover-brand { position: absolute; top: max(20px, env(safe-area-inset-top)); right: 76px; margin: 0; color: #86202a; font-weight: 900; font-size: clamp(.9rem,3.4vw,1.15rem); letter-spacing: .08em; text-shadow: 0 1px 4px rgba(255,255,255,.9); }
+.cover-brand { position: absolute; top: max(44px, calc(env(safe-area-inset-top) + 20px)); right: 76px; margin: 0; color: #86202a; font-weight: 900; font-size: clamp(.9rem,3.4vw,1.15rem); line-height: 1.15; letter-spacing: .08em; text-shadow: 0 1px 4px rgba(255,255,255,.9); }
 .intro-copy { width: min(100%, 520px); margin-top: clamp(42px, 7vh, 82px); text-align: center; }
 .eyebrow { margin: 0 0 8px; font-weight: 800; letter-spacing: .24em; color: #b11227; }
 .intro h1 { margin: 0; color: #fffdf7; font-size: clamp(2rem, 8.2vw, 3.35rem); line-height: 1.24; letter-spacing: -.01em; font-weight: 900; white-space: nowrap; -webkit-text-stroke: 3px #ad2832; paint-order: stroke fill; text-shadow: 0 4px 0 #8f1c27, 0 9px 20px rgba(85,0,10,.22); }
