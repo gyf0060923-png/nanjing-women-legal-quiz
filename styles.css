@@ -23,7 +23,7 @@ button { font: inherit; }
   position: absolute;
   inset: 0;
   z-index: -3;
-  background: url("./assets/cover-v15-hd.webp") center center / cover no-repeat;
+  background: url("./assets/cover-v18-hd.webp") center center / cover no-repeat;
   transition: opacity .18s ease;
   transform: scale(1.03);
   animation: drift 12s ease-in-out infinite alternate;
@@ -226,4 +226,3 @@ button { font: inherit; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .confetti-burst { display: none; }
 }
-
