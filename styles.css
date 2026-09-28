@@ -168,7 +168,7 @@ button { font: inherit; }
 .result { justify-content: space-between; }
 .result-card { width: min(100%,460px); margin: auto 0; padding: 38px 28px 34px; border-radius: 32px; text-align: center; background: rgba(255,250,241,.94); box-shadow: 0 24px 70px rgba(79,0,11,.3); }
 .result-medal { display: grid; place-items: center; animation: float 2.7s ease-in-out infinite; }
-.result-medal img { display: block; width: 154px; height: auto; mix-blend-mode: darken; }
+.result-medal svg { display: block; width: 154px; height: auto; }
 .result-card h2 { margin: 8px 0; color: #941225; font-size: 2rem; }
 .score { display: flex; align-items: baseline; justify-content: center; margin: 12px 0; color: #8f5b5f; }
 .score strong { color: #c4182d; font-size: 4.6rem; line-height: 1; }
