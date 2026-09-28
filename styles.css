@@ -73,7 +73,7 @@ button { font: inherit; }
 .cover-logo img { display: block; width: 100%; height: auto; }
 .intro-copy { width: min(100%, 520px); margin-top: clamp(42px, 7vh, 82px); text-align: center; }
 .eyebrow { margin: 0 0 8px; font-weight: 800; letter-spacing: .24em; color: #b11227; }
-.intro h1 { display: grid; justify-items: center; gap: 10px; margin: 0; color: #fffdf7; font-weight: 900; white-space: nowrap; paint-order: stroke fill; text-shadow: 0 4px 0 #8f1c27, 0 9px 20px rgba(85,0,10,.22); }
+.intro h1 { display: grid; justify-items: center; gap: 10px; margin: 0; color: #fffdf7; font-family: system-ui, sans-serif; font-weight: 800; white-space: nowrap; paint-order: stroke fill; text-shadow: none; }
 .title-main { font-size: clamp(2.2rem, 10vw, 4rem); line-height: 1.2; letter-spacing: -.01em; -webkit-text-stroke: 3px #ad2832; }
 .title-sub { font-size: clamp(1.15rem, 5vw, 1.7rem); line-height: 1.25; letter-spacing: .03em; -webkit-text-stroke: 1.5px #ad2832; }
 .intro-lead { max-width: 390px; margin: 22px auto 0; line-height: 1.8; font-size: 1rem; color: #6f3438; }
