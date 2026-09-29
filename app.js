@@ -116,7 +116,7 @@ const loadImage = (name, priority = "auto") => {
 
 const scene = (name) => {
   const request = ++sceneRequest;
-  $("app").classList.toggle("is-cover", name === "cover-v18-hd.webp");
+  $("app").classList.toggle("is-cover", name === "cover-v19-hd.webp");
   backdrop.style.opacity = ".15";
   loadImage(name).then(() => {
     if (request !== sceneRequest) return;
@@ -279,11 +279,11 @@ const chooseAnswer = (index, button) => {
 
 const finish = () => {
   $("scoreNo").textContent = score;
-  $("resultTitle").textContent = score === 5 ? "权益知识达人" : score >= 3 ? "普法进阶达人" : "权益学习新星";
-  $("resultNote").textContent = score === 5
+  $("resultTitle").textContent = score === questions.length ? "权益知识达人" : "普法进阶达人";
+  $("resultNote").textContent = score === questions.length
     ? "全部答对！每一次了解，都是守护自己与他人的力量。"
     : "了解权益，才能更好地守护权益。再巩固一次，你会更有底气。";
-  scene("cover-v18-hd.webp");
+  scene("cover-v19-hd.webp");
   showScreen(resultScreen);
 };
 
@@ -377,4 +377,4 @@ document.addEventListener("visibilitychange", () => {
 preloadEffectData();
 backgroundMusic.load();
 startMusic();
-scene("cover-v18-hd.webp");
+scene("cover-v19-hd.webp");
