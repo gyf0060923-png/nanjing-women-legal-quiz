@@ -74,11 +74,11 @@ button { font: inherit; }
 .intro-copy { width: min(100%, 520px); margin-top: clamp(24px, 3vh, 40px); text-align: center; }
 .intro-kicker {
   position: relative; width: min(84vw, 395px); height: 106px; margin: 0 auto 5px;
-  color: #ad4e40; font-size: clamp(1.05rem, 4.1vw, 1.3rem); font-weight: 900;
+  color: #ad4e40; font-size: clamp(1.2rem, 4.8vw, 1.6rem); font-weight: 900;
   letter-spacing: .06em; white-space: nowrap;
 }
 .intro-kicker img { display: block; width: 100%; height: 100%; }
-.intro-kicker > span { position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%) rotate(-2deg); }
+.intro-kicker > span { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); }
 .eyebrow { margin: 0 0 8px; font-weight: 800; letter-spacing: .24em; color: #b11227; }
 .intro h1 { display: grid; justify-items: center; gap: 10px; margin: 0; color: #a51d2b; font-family: system-ui, sans-serif; font-weight: 800; white-space: nowrap; paint-order: stroke fill; text-shadow: none; }
 .title-main { font-size: clamp(2.25rem, 11.2vw, 4.5rem); line-height: 1.2; letter-spacing: -.01em; -webkit-text-stroke: 3px #fff; }
