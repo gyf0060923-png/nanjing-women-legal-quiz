@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 126" role="img" aria-label="铅笔和翻开的书装饰的浅色横幅">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#fff9e9"/>
+      <stop offset="1" stop-color="#fff1d9"/>
+    </linearGradient>
+    <linearGradient id="pencil" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffd778"/>
+      <stop offset=".55" stop-color="#f3a32e"/>
+      <stop offset="1" stop-color="#dc7629"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-12%" y="-20%" width="124%" height="150%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#b56e52" flood-opacity=".18"/>
+    </filter>
+  </defs>
+
+  <path d="M50 51 Q112 28 186 36 Q258 42 326 32 Q364 27 394 42 L400 100 Q355 89 309 94 Q235 103 175 96 Q107 89 41 105 Q45 75 50 51Z" fill="url(#paper)" stroke="#e6b279" stroke-width="3.5" filter="url(#soft-shadow)"/>
+  <path d="M62 56 Q116 38 185 44 Q258 50 326 40 Q357 36 384 46" fill="none" stroke="#fffdf4" stroke-width="3" opacity=".95"/>
+  <path d="M51 99 Q116 84 176 91 Q242 99 309 88 Q356 83 390 94" fill="none" stroke="#e8c59b" stroke-width="1.7" opacity=".65"/>
+
+  <g transform="translate(28 39) rotate(-17 61 7)" filter="url(#soft-shadow)">
+    <path d="M0 7 15 0v14Z" fill="#efd4aa" stroke="#bd8055" stroke-width="1.5"/>
+    <path d="M0 7 6 4.3v5.4Z" fill="#66564d"/>
+    <path d="M15 0h94v14H15Z" fill="url(#pencil)" stroke="#d68436" stroke-width="1.5"/>
+    <path d="M17 3h90M17 11h90" stroke="#ffe7a2" stroke-width="1.5" opacity=".85"/>
+    <path d="M109 0h7v14h-7Z" fill="#d9dde0" stroke="#aab0b6" stroke-width="1"/>
+    <path d="M116 0h10q5 7 0 14h-10Z" fill="#e98679" stroke="#bd5d5b" stroke-width="1.5"/>
+  </g>
+
+  <g transform="translate(326 6) rotate(13 39 27)" filter="url(#soft-shadow)">
+    <path d="M38 17 Q18 5 0 12 L4 51 Q23 43 40 58 Q56 42 77 48 L82 9 Q61 2 38 17Z" fill="#dd6f58" stroke="#b95450" stroke-width="2"/>
+    <path d="M38 15 Q20 5 5 8 L8 43 Q25 38 40 51Z" fill="#fff9ea" stroke="#c8d8dc" stroke-width="1.7"/>
+    <path d="M40 15 Q58 3 77 7 L74 42 Q56 37 40 51Z" fill="#fff7e9" stroke="#c8d8dc" stroke-width="1.7"/>
+    <path d="M40 15v36M12 17q11-4 21 3M13 23q11-3 20 4M47 20q10-7 22-5M47 27q11-6 22-4" fill="none" stroke="#d9bcae" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M4 51 Q23 43 40 58 Q56 42 77 48" fill="none" stroke="#b95450" stroke-width="2"/>
+  </g>
+</svg>

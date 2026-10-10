@@ -71,16 +71,14 @@ button { font: inherit; }
   filter: drop-shadow(0 5px 10px rgba(56,65,97,.18));
 }
 .cover-logo img { display: block; width: 100%; height: auto; }
-.intro-copy { width: min(100%, 520px); margin-top: clamp(42px, 7vh, 82px); text-align: center; }
+.intro-copy { width: min(100%, 520px); margin-top: clamp(24px, 3vh, 40px); text-align: center; }
 .intro-kicker {
-  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-  width: min(75vw, 340px); height: 68px; margin: 0 auto 14px; padding: 5px 30px 0;
-  color: #a71d30; font-size: clamp(.82rem, 3.3vw, 1.05rem);
-  font-weight: 800; letter-spacing: .08em; white-space: nowrap;
+  position: relative; width: min(84vw, 395px); height: 106px; margin: 0 auto 5px;
+  color: #ad4e40; font-size: clamp(.82rem, 3.3vw, 1.07rem); font-weight: 800;
+  letter-spacing: .06em; white-space: nowrap;
 }
-.kicker-ribbon { position: absolute; inset: 0; width: 100%; height: 100%; }
-.intro-kicker > span, .kicker-icon { position: relative; z-index: 1; }
-.kicker-icon { display: block; width: 23px; height: 23px; flex: none; fill: none; stroke: #b92739; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.intro-kicker img { display: block; width: 100%; height: 100%; }
+.intro-kicker > span { position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%) rotate(-2deg); }
 .eyebrow { margin: 0 0 8px; font-weight: 800; letter-spacing: .24em; color: #b11227; }
 .intro h1 { display: grid; justify-items: center; gap: 10px; margin: 0; color: #a51d2b; font-family: system-ui, sans-serif; font-weight: 800; white-space: nowrap; paint-order: stroke fill; text-shadow: none; }
 .title-main { font-size: clamp(2.25rem, 11.2vw, 4.5rem); line-height: 1.2; letter-spacing: -.01em; -webkit-text-stroke: 3px #fff; }
