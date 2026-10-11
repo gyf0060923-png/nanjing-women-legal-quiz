@@ -80,7 +80,7 @@ button { font: inherit; }
 .intro-kicker img { display: block; width: 100%; height: 100%; }
 .intro-kicker > span { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); }
 .eyebrow { margin: 0 0 8px; font-weight: 800; letter-spacing: .24em; color: #b11227; }
-.intro h1 { display: grid; justify-items: center; gap: 10px; margin: 0; color: #a51d2b; font-family: system-ui, sans-serif; font-weight: 800; white-space: nowrap; paint-order: stroke fill; text-shadow: none; }
+.intro h1 { display: grid; justify-items: center; gap: 4px; margin: 0; color: #a51d2b; font-family: system-ui, sans-serif; font-weight: 800; white-space: nowrap; paint-order: stroke fill; text-shadow: none; transform: translateY(-18px); }
 .title-main { font-size: clamp(2.25rem, 11.2vw, 4.5rem); line-height: 1.2; letter-spacing: -.01em; -webkit-text-stroke: 3px #fff; }
 .title-sub { font-size: clamp(1.25rem, 5.8vw, 2rem); line-height: 1.25; letter-spacing: .03em; -webkit-text-stroke: 1.5px #fff; }
 .cover-law-title { position: absolute; top: 44%; left: 54%; display: grid; gap: 2px; transform: translate(-50%,-50%) rotate(7deg); color: #fff0c1; font-size: clamp(.55rem, 2.2vw, .75rem); font-weight: 800; line-height: 1.2; letter-spacing: .02em; text-align: center; white-space: nowrap; pointer-events: none; }
